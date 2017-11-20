@@ -1,5 +1,7 @@
 package Othello;
 
+import DataStructure.Minimax;
+
 public class RudiePlayer extends OthelloPlayer{
 
 	private int depth;
@@ -12,6 +14,10 @@ public class RudiePlayer extends OthelloPlayer{
 
 	@Override
 	public OthelloMove getMove(OthelloState state) {
+		
+		Minimax mx = new Minimax();
+		
+		
 		
 		return null;
 	}
