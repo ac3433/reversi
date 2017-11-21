@@ -6,14 +6,13 @@ public class Test {
     public static void main(String args[]) {
         // Create the game state with the initial position for an 8x8 board:
         OthelloState state = new OthelloState(8);
-        OthelloPlayer players[] = {new OthelloRandomPlayer(),
-                                   new OthelloRandomPlayer()};
-        
+        OthelloPlayer players[] = {new OthelloRandomPlayer(), new RudiePlayer(4)};
+        long startTime = System.currentTimeMillis();
         do{
             // Display the current state in the console:
             System.out.println("\nCurrent state, " + OthelloState.PLAYER_NAMES[state.nextPlayerToMove] + " to move:");
             System.out.print(state);
-            
+                        
             // Get the move from the player:
             OthelloMove move = players[state.nextPlayerToMove].getMove(state);            
             System.out.println(move);
@@ -23,6 +22,8 @@ public class Test {
         // Show the result of the game:
         System.out.println("\nFinal state with score: " + state.score());
         System.out.println(state);
+		long endTime = System.currentTimeMillis();
+		System.out.println("Game execution time: " + (endTime - startTime) + " miliseconds");
     }    
     
 }

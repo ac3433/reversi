@@ -3,9 +3,9 @@ package DataStructure;
 import Othello.OthelloMove;
 import Othello.OthelloState;
 
-public class Minimax {
+public class MinimaxAlphaBeta {
 
-	public int getBestMove(Node node, int depth, boolean isMax)
+	public int getBestMove(Node node, int depth, boolean isMax, int alpha, int beta)
 	{
 		//if there is no more moves
 		if(node.getCurrentState().generateMoves().isEmpty() || node.getCurrentState().gameOver())
@@ -34,8 +34,12 @@ public class Minimax {
 			
 			for(Node child : node.getChildren())
 			{
-				best = Math.max(best, getBestMove(child, depth, !isMax));
-
+				best = Math.max(best, getBestMove(child, depth, !isMax, alpha, beta));
+				alpha = Math.max(alpha, best);
+				
+				//prune
+				if(beta <= alpha)
+					break;
 			}
 			
 			return best;
@@ -47,7 +51,12 @@ public class Minimax {
 			
 			for(Node child : node.getChildren())
 			{
-				best = Math.min(best, getBestMove(child, depth, !isMax));
+				best = Math.min(best, getBestMove(child, depth, !isMax, alpha, beta));
+				beta = Math.min(best, beta);
+				
+				//prune here
+				if(beta <= alpha)
+					break;
 			}
 			return best;
 		}

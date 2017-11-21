@@ -2,18 +2,18 @@ package Othello;
 
 import java.util.List;
 
-import DataStructure.MinimaxAlphaBeta;
+import DataStructure.Minimax;
 import DataStructure.Node;
 
-public class RudiePlayer extends OthelloPlayer{
+public class TatayadiPlayer extends OthelloPlayer{
 
 	private int depth;
-	private MinimaxAlphaBeta mx;
+	private Minimax mx;
 	
-	public RudiePlayer(int depth)
+	public TatayadiPlayer(int depth)
 	{
 		this.depth = depth;
-		this.mx = new MinimaxAlphaBeta();
+		this.mx = new Minimax();
 	}
 
 	@Override
@@ -25,9 +25,7 @@ public class RudiePlayer extends OthelloPlayer{
 		{
 			Node root = new Node(state);
 			
-			//time tracker for how long it takes to decide a move
 			long startTime = System.currentTimeMillis();
-			//get list of potential moves
 			for(OthelloMove choice : moves)
 			{
 				OthelloState s = root.getCurrentState().clone();
@@ -39,12 +37,13 @@ public class RudiePlayer extends OthelloPlayer{
 			int bestPosition = 0;
 			for(int i = 0; i < root.getChildren().size(); i++)
 			{
+				
 				//get the best value depends on the player
 				//since we are evaluating based on score. 2nd player want the score to be in the negatives
 				//if the player who is executing this is 0, they want positive values so they get the best of max
 				if(state.nextPlayerToMove == 0)
 				{
-					int val = mx.getBestMove(root.getChildren().get(i), depth, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
+					int val = mx.getBestMove(root.getChildren().get(i), depth, true);
 					if( val > bestVal)
 					{
 						bestPosition = i;
@@ -55,22 +54,19 @@ public class RudiePlayer extends OthelloPlayer{
 				else
 				{
 					//setting it to false will make it return the minimal
-					int val = mx.getBestMove(root.getChildren().get(i), depth, false, Integer.MAX_VALUE, Integer.MIN_VALUE);
+					int val = mx.getBestMove(root.getChildren().get(i), depth, false);
 					if( val < bestVal)
 					{
 						bestPosition = i;
 						bestVal = val;
 					}
 				}
-
 			}
 			long endTime = System.currentTimeMillis();
-			System.out.println("Rudie Player execution time: " + (endTime - startTime) + " miliseconds");
+			System.out.println("Tatayadi Player execution time: " + (endTime - startTime) + " miliseconds");
 			return moves.get(bestPosition);
 		}
 		
 		return null;
 	}
-	
-	
 }

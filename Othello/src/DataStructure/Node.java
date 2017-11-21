@@ -1,7 +1,9 @@
 
 package DataStructure;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import Othello.*;
 
@@ -9,14 +11,14 @@ public class Node {
 
 	private OthelloState currentState;
 	private Node parent;
-	private HashSet<Node> children;
+	private List<Node> children;
 	//this is to collective count the chance of wins and loss on the side of the tree
 	private int totalWin = 0;
 
 	public Node(OthelloState currentState)
 	{
 		this.currentState = currentState;
-		children = new HashSet<Node>();
+		children = new ArrayList<Node>();
 	}
 	
 	public Node(OthelloState currentState, Node parent)
@@ -30,7 +32,7 @@ public class Node {
 		children.add(child);
 	}
 	
-	public HashSet<Node> getChildren()
+	public List<Node> getChildren()
 	{
 		return children;
 	}
