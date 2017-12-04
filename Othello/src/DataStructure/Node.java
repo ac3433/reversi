@@ -14,6 +14,7 @@ public class Node {
 	private List<Node> children;
 	//this is to collective count the chance of wins and loss on the side of the tree
 	private int totalWin = 0;
+	private int visitCount = 0;
 
 	public Node(OthelloState currentState)
 	{
@@ -40,6 +41,9 @@ public class Node {
 	public void incrementWin() { totalWin++; }
 	public void decrementWin() {totalWin--; }
 	public int getTotalWin() { return totalWin; }
+	public void incrementVisit() { visitCount++; }
+	public void addVisit(int visitCount) { this.visitCount += visitCount; }
+	public int getVisitCount() { return visitCount; }
 	public void addTotalWin(int total) { totalWin += total; }
 	public Node getParent() { return parent; }
 	public OthelloState getCurrentState() { return currentState; }

@@ -35,6 +35,16 @@ public class TatayadiPlayer extends OthelloPlayer{
 			
 			int bestVal = 0;
 			int bestPosition = 0;
+			
+			if(state.nextPlayerToMove == 0)
+			{
+				bestVal = Integer.MIN_VALUE;
+			}
+			else
+			{
+				bestVal = Integer.MAX_VALUE;
+			}
+			
 			for(int i = 0; i < root.getChildren().size(); i++)
 			{
 				

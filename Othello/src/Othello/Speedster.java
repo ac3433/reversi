@@ -40,6 +40,15 @@ public class Speedster extends OthelloPlayer {
 			int bestVal = 0;
 			int bestPosition = 0;
 			
+			if(state.nextPlayerToMove == 0)
+			{
+				bestVal = Integer.MIN_VALUE;
+			}
+			else
+			{
+				bestVal = Integer.MAX_VALUE;
+			}
+			
 			timer:
 			while(true)
 			{
